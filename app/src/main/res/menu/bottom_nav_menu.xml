@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@drawable/ic_globe"
+        android:title="@string/headlines" />
+    <item
+        android:icon="@drawable/ic_favorite"
+        android:title="@string/favourites" />
+    <item
+        android:icon="@drawable/ic_search"
+        android:title="@string/search" />
+</menu>
