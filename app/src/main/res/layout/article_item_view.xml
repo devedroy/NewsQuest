@@ -47,11 +47,11 @@
             tools:text="Description" />
 
         <TextView
-            android:id="@+id/tvContent"
+            android:id="@+id/tvPublishedDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            tools:text="Content" />
+            tools:text="Published Date" />
     </LinearLayout>
 
 </LinearLayout>

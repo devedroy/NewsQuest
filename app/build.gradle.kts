@@ -18,7 +18,13 @@ android {
     }
 
     buildTypes {
+        val apiKey: String = project.findProperty("API_KEY") as String? ?: ""
+        val apiKey2 = "38eb434d84ee4dc7aee28c014b09cff0"
+        debug {
+            buildConfigField("String", "API_KEY", "\"$apiKey2\"")
+        }
         release {
+            buildConfigField("String", "API_KEY", "\"$apiKey2\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -35,6 +41,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -50,4 +57,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.glide)
+    implementation(libs.gson)
+    implementation(libs.retrofit)
+
 }
