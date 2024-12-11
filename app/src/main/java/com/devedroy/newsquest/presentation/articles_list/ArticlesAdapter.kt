@@ -33,7 +33,9 @@ class ArticlesAdapter(
             binding.tvAuthor.text = article.author
             binding.tvDescription.text = article.description
             binding.tvPublishedDate.text = article.publishedDate
-            binding.ivArticle.loadImage(article.urlToImage)
+            article.urlToImage?.let {
+                binding.ivArticle.loadImage(it)
+            }
         }
     }
 }

@@ -5,7 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.devedroy.newsquest.databinding.FragmentArticlesBinding
+import com.devedroy.newsquest.domain.models.Article
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass.
@@ -16,12 +23,14 @@ import com.devedroy.newsquest.databinding.FragmentArticlesBinding
 const val ARG_PARAM1 = ""
 const val ARG_PARAM2 = ""
 
+@AndroidEntryPoint
 class ArticlesFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
     private lateinit var binding: FragmentArticlesBinding
+    private val viewModel: ArticlesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +47,19 @@ class ArticlesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.articles.collect { articles ->
+                    val adapter = ArticlesAdapter(articles)
+                    binding.rvArticles.adapter = adapter
+                }
+            }
+        }
     }
 
     companion object {
