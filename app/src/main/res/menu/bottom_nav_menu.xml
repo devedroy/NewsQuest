@@ -4,7 +4,7 @@
         android:icon="@drawable/ic_globe"
         android:title="@string/headlines" />
     <item
-        android:icon="@drawable/ic_favorite"
+        android:icon="@drawable/ic_favorite_filled"
         android:title="@string/favourites" />
     <item
         android:icon="@drawable/ic_search"

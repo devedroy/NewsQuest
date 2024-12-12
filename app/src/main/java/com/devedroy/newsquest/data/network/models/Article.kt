@@ -46,7 +46,8 @@ fun Article.toDomainArticles(): List<DomainArticle> {
             description = article.description,
             urlToImage = article.urlToImage,
             publishedDate = article.publishedAt,
-            author = article.author
+            author = article.author,
+            url = article.url
         )
     }
 }

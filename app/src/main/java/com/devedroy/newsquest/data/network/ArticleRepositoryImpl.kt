@@ -11,7 +11,7 @@ import javax.inject.Inject
 class ArticleRepositoryImpl @Inject constructor(
     private val newsService: NewsService
 ) : ArticleRepository {
-    val apiKey = BuildConfig.API_KEY
+    private val apiKey = BuildConfig.API_KEY
     override suspend fun getArticles(): NewsResult<List<Article>, DataError.Network> {
         val response = newsService.getUsers(apiKey)
 
@@ -27,4 +27,5 @@ class ArticleRepositoryImpl @Inject constructor(
             return NewsResult.Error(DataError.Network.UNKNOWN)
         }
     }
+
 }

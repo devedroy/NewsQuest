@@ -1,5 +1,6 @@
 package com.devedroy.newsquest.presentation.articles_list
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.devedroy.newsquest.databinding.FragmentArticlesBinding
-import com.devedroy.newsquest.domain.models.Article
+import com.devedroy.newsquest.presentation.ArticleDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -55,7 +56,13 @@ class ArticlesFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.articles.collect { articles ->
-                    val adapter = ArticlesAdapter(articles)
+                    val adapter = ArticlesAdapter(
+                        articles,
+                        onArticleClicked = { url ->
+                            val intent = Intent(requireContext(), ArticleDetailActivity::class.java)
+                            intent.putExtra(ArticleDetailActivity.URL_KEY, url)
+                            startActivity(intent)
+                        })
                     binding.rvArticles.adapter = adapter
                 }
             }

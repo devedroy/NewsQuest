@@ -8,7 +8,8 @@ import com.devedroy.newsquest.domain.models.Article
 import com.devedroy.newsquest.presentation.extensions.loadImage
 
 class ArticlesAdapter(
-    private val articles: List<Article>
+    private val articles: List<Article>,
+    private val onArticleClicked: (String) -> Unit
 ) : RecyclerView.Adapter<ArticlesAdapter.ArticleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
@@ -35,6 +36,9 @@ class ArticlesAdapter(
             binding.tvPublishedDate.text = article.publishedDate
             article.urlToImage?.let {
                 binding.ivArticle.loadImage(it)
+            }
+            binding.root.setOnClickListener {
+                onArticleClicked(article.url)
             }
         }
     }
